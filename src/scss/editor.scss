@@ -1,0 +1,133 @@
+.preview-box {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 400px;
+    bottom: 0;
+    border-right: 1px solid #f00;
+    overflow: auto;
+    .add {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 40px;
+        background-color: #fff;
+    }
+}
+.preview-list {
+    position: relative;
+    height: 100%;
+    background-color: #f1f1f1;
+    .item {
+        width: 300px;
+        height: 300px;
+        margin-bottom: 16px;
+        background-color: #fff;
+        border: 1px solid #888;
+        cursor: pointer;
+    }
+    .img {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+.editor-box {
+    position: absolute;
+    top: 64px;
+    left: 400px;
+    right: 0;
+    bottom: 0;
+    padding: 16px;
+    .btns {
+        margin-bottom: 16px;
+        .btn {
+            margin-right: 8px;
+        }
+    }
+}
+.page-editor {
+    position: relative;
+    width: 400px;
+    height: 500px;
+    border: 1px solid #999;
+    overflow: hidden;
+    &:hover {
+        .link {
+            opacity: .1;
+        }
+        .tag {
+            opacity: .3;
+        }
+    }
+    img {
+        width: 100%;
+    }
+    .link {
+        position: absolute;
+        background-color: #09c;
+        opacity: 0;
+        cursor: pointer;
+        &:hover {
+            opacity: .3;
+        }
+    }
+    .tag {
+        position: absolute;
+        z-index: 100;
+        opacity: .1;
+    }
+}
+/**/
+.link-box {
+    float: right;
+    width: 300px;
+    padding: 16px;
+    background-color: #fff;
+    border: 1px solid #666;
+}
+/**/
+.all-box {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    background-color: #fff;
+}
+.all-list {
+    padding: 16px;
+    .item {
+        float: left;
+        margin-right: 32px;
+        margin-bottom: 32px;
+
+        position: relative;
+        width: 400px;
+        height: 500px;
+        border: 1px solid #999;
+        overflow: hidden;
+        position: relative;
+        width: 400px;
+        height: 500px;
+        border: 1px solid #999;
+        overflow: hidden;
+        &:hover {
+            .link {
+                opacity: .1;
+            }
+        }
+        img {
+            width: 100%;
+        }
+        .link {
+            position: absolute;
+            background-color: #09c;
+            opacity: 0;
+            &:hover {
+                opacity: .3;
+            }
+        }
+    }
+}
