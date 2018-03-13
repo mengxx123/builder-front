@@ -23,12 +23,23 @@
                 <div>当前页面 ID：{{ page.id }}</div>
             </div>
             <div class="btns">
+                <bar-menu label="文件">
+                    <ui-menu>
+                        <ui-menu-item title="新建" @click="newFile" leftIcon="add" />
+                        <ui-menu-item title="保存" @click="saveFile" />
+                        <ui-menu-item title="下载" @click="download" />
+                    </ui-menu>
+                </bar-menu>
                 <ui-raised-button class="btn" label="返回上一页" @click="back" :disable="!lastPageId" />
-                <ui-raised-button class="btn" label="新建" @click="newFile" />
-                <ui-raised-button class="btn" label="保存" @click="saveFile" />
                 <ui-raised-button class="btn" label="预览" @click="preview" />
+                <ui-raised-button class="file-btn" label="从文件中导入">
+                    <input type="file" class="ui-file-button" @change="fileChange($event, 1)">
+                </ui-raised-button>
                 <ui-raised-button class="btn" label="显示所有" @click="showAllPage" />
                 <ui-raised-button class="btn" label="设置" @click="showOption" />
+                <ui-raised-button class="file-btn" label="修改图片">
+                    <input type="file" class="ui-file-button" @change="fileChange2($event, 1)">
+                </ui-raised-button>
             </div>
             <div>返回上一页</div>
             <div v-if="!page">
@@ -128,10 +139,14 @@
                 <ui-list-item title="Menu Item 3"/>
             </ui-list>
         </ui-drawer>
+        <ui-toast v-if="toast" :message="toastMessage" @close="hideToast"/>
+
     </my-page>
 </template>
 
 <script>
+    const saveAs = window.saveAs
+
     export default {
         data () {
             return {
@@ -240,6 +255,8 @@
                 },
                 //
                 optionVisible: false,
+                toast: false,
+                toastMessage: '',
                 _page: {
                     menu: [
                         {
@@ -255,6 +272,16 @@
             this.init()
         },
         methods: {
+            showToast(message) {
+                this.toast = true
+                this.toastMessage = message
+                if (this.toastTimer) clearTimeout(this.toastTimer)
+                this.toastTimer = setTimeout(() => { this.toast = false }, 2000)
+            },
+            hideToast() {
+                this.toast = false
+                if (this.toastTimer) clearTimeout(this.toastTimer)
+            },
             init() {
                 this.page = this.pages[0]
                 this.rederPage()
@@ -415,12 +442,54 @@
                     pages: this.pages
                 }
                 this.$storage.set('tempData', saveObj)
+                this.showToast('本地保存成功')
             },
             loadFile() {
                 let saveObj = this.$storage.get('tempData')
                 if (saveObj) {
                     this.pages = saveObj.pages
                 }
+            },
+            download() {
+                // TODO refactor
+                let saveObj = {
+                    version: '1.0.0',
+                    pages: this.pages
+                }
+                let json = JSON.stringify(saveObj)
+                let blob = new Blob([json], {type: 'application/json;charset=utf-8'})
+                saveAs(blob, '未命名' + '.json')
+            },
+            fileChange(e, left) {
+                let file = e.target.files[0]
+//                    var f_name = file.name;
+//                    var f_type = f_name.substring(f_name.lastIndexOf("."))
+                let reader = new FileReader()
+                reader.onload = e => {
+                    let content = e.target.result
+                    console.log(content)
+                    let saveObj = JSON.parse(content)
+                    if (saveObj) {
+                        this.pages = saveObj.pages
+                    }
+                }
+                reader.readAsText(file, 'utf-8')
+            },
+            fileChange2(e, left) {
+                let file = e.target.files[0]
+                console.log(e.target.files)
+                if (!e.target.files.length) {
+                    return
+                }
+                let reader = new FileReader()
+                reader.onload = e => {
+                    let dataUrl = e.target.result
+                    this.page.image = dataUrl
+                }
+                reader.readAsDataURL(file)
+            },
+            setImage() {
+
             }
         }
     }
