@@ -13,7 +13,7 @@
             }
         },
         mounted() {
-            this.$http.get('/version').then(
+            this.$http.get('https://www.google.com/complete/search?q=%E5%AE%89%E5%8D%93&hl=zh_CN&ds=i&client=onepick-web-image&xhr=t&jsonp=_callbacks____6jep7ns4d').then(
                 response => {
                     let data = response.data
                     if (data.code === 200) {

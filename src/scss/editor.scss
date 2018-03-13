@@ -1,5 +1,4 @@
-$primary: #009688;
-$divider: rgba(0,0,0,.12);
+@import "var";
 
 .ui-file-button{
     position: absolute;
@@ -43,6 +42,7 @@ $divider: rgba(0,0,0,.12);
         border: 1px solid #888;
         cursor: pointer;
         overflow: hidden;
+        transition: all .5s;
         &.active {
             border: 1px solid $primary;
         }
@@ -56,7 +56,6 @@ $divider: rgba(0,0,0,.12);
     .img {
         display: block;
         width: 100%;
-        height: 100%;
     }
     .footer {
         position: absolute;
@@ -148,6 +147,25 @@ $divider: rgba(0,0,0,.12);
         height: 40px;
         background-color: #f00;
     }
+    .droping {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        border: 2px dashed $dropColor;
+    }
+}
+.mode-preview {
+    .page-editor {
+        z-index: 100000;
+        cursor: url("/static/img/cursor.png") 25 25,default;
+    }
 }
 /**/
 .link-box {
@@ -212,5 +230,41 @@ $divider: rgba(0,0,0,.12);
     .text {
         margin-left: 16px;
         color: #999;
+    }
+}
+/**/
+.all-list2 {
+    padding: 16px;
+    .item {
+        float: left;
+        margin-right: 32px;
+        margin-bottom: 32px;
+        position: relative;
+        width: 400px;
+        height: 500px;
+        border: 1px solid #999;
+        overflow: hidden;
+        position: relative;
+        width: 400px;
+        height: 500px;
+        border: 1px solid #999;
+        overflow: hidden;
+        cursor: pointer;
+        &:hover {
+            .link {
+                opacity: .1;
+            }
+        }
+        img {
+            width: 100%;
+        }
+        .link {
+            position: absolute;
+            background-color: #09c;
+            opacity: 0;
+            &:hover {
+                opacity: .3;
+            }
+        }
     }
 }
