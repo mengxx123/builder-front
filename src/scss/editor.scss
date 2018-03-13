@@ -1,11 +1,12 @@
+$primary: #009688;
+$divider: rgba(0,0,0,.12);
 .preview-box {
     position: fixed;
     top: 64px;
     left: 0;
-    width: 400px;
+    width: 210px;
     bottom: 0;
-    border-right: 1px solid #f00;
-    overflow: auto;
+    border-right: 1px solid $divider;
     .add {
         position: absolute;
         bottom: 0;
@@ -15,30 +16,64 @@
     }
 }
 .preview-list {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    bottom: 40px;
+    padding: 16px 16px 40px 16px;
     background-color: #f1f1f1;
+    overflow: auto;
     .item {
-        width: 300px;
-        height: 300px;
+        position: relative;
+        width: 160px;
+        height: 240px;
         margin-bottom: 16px;
         background-color: #fff;
         border: 1px solid #888;
         cursor: pointer;
+        overflow: hidden;
+        &.active {
+            border: 1px solid $primary;
+        }
+        &:hover {
+            opacity: .8;
+            .footer {
+                bottom: 0;
+            }
+        }
     }
     .img {
         display: block;
         width: 100%;
         height: 100%;
     }
+    .footer {
+        position: absolute;
+        bottom: -48px;
+        left: 0;
+        width: 100%;
+        height: 48px;
+        background-color: #fff;
+        transition: all .3s;
+    }
+    .item-add {
+        width: 160px;
+        height: 240px;
+        border: 1px dashed #999;
+        text-align: center;
+        line-height: 240px;
+        cursor: pointer;
+    }
 }
 .editor-box {
     position: absolute;
-    top: 64px;
-    left: 400px;
+    top: 0;
+    left: 210px;
     right: 0;
     bottom: 0;
     padding: 16px;
+    user-select: none;
     .btns {
         margin-bottom: 16px;
         .btn {
@@ -60,8 +95,23 @@
             opacity: .3;
         }
     }
-    img {
+    .img-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
+        height: 100%;
+        //overflow: auto;
+        img {
+            width: 100%;
+        }
+    }
+    .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
     .link {
         position: absolute;
@@ -76,6 +126,17 @@
         position: absolute;
         z-index: 100;
         opacity: .1;
+        img {
+            width: 100%;
+        }
+    }
+    .temp-link {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 40px;
+        height: 40px;
+        background-color: #f00;
     }
 }
 /**/
@@ -129,5 +190,17 @@
                 opacity: .3;
             }
         }
+    }
+}
+/**/
+.save-box {
+    position: absolute;
+    align-items: center;
+    left: 16px;
+    bottom: 16px;
+    display: flex;
+    .text {
+        margin-left: 16px;
+        color: #999;
     }
 }
