@@ -1,5 +1,5 @@
 <template>
-    <my-page title="图片原型工具" :page="_page" :class="{'mode-preview': mode === 'preview'}">
+    <my-page title="图片原型工具" :page="_page" :class="{'mode-preview': mode === 'preview', 'mode-edit': mode === 'edit'}">
         <section class="preview-box">
             <ul class="preview-list">
                 <li class="item" v-for="p, index in pages" @click="setPage(p)"
@@ -215,7 +215,6 @@
             <ul class="all-list2">
                 <li class="item page-editor"
                     :id="'all-page-' + p.id"
-                    ref="editor"
                     @click="setToPage(p)"
                     v-for="p in pages"
                     :style="{width: options.width + 'px', height: options.height + 'px'}">

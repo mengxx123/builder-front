@@ -161,9 +161,21 @@
         border: 2px dashed $dropColor;
     }
 }
+.mode-edit {
+    .page-editor {
+        &:hover {
+            .link {
+                opacity: 1;
+            }
+        }
+        .link {
+            opacity: .8;
+        }
+    }
+}
 .mode-preview {
     .page-editor {
-        z-index: 100000;
+        z-index: 33141254;
         cursor: url("/static/img/cursor.png") 25 25,default;
     }
 }
